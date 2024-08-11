@@ -1,6 +1,6 @@
-# Dialogue History
+# Spell Research UI
 
-SKSE plugin that adds dialogue history for Skyrim Special Edition
+SKSE plugin that adds a simple UI to see your spell research experience in Spell Research for Skyrim Special Edition
 
 ## Requirements
 * [CMake](https://cmake.org/)
@@ -21,9 +21,9 @@ SKSE plugin that adds dialogue history for Skyrim Special Edition
 
 ## Building
 ```
-git clone https://github.com/powerof3/DialogueHistory.git
-cd DialogueHistory
-# pull commonlib /extern to override the path settings
+git clone https://github.com/lordmentat/SpellResearchUI
+cd SpellResearchUI
+# pull external modules to override the path settings
 git submodule init
 # to update submodules to checked in build
 git submodule update
@@ -40,4 +40,4 @@ cmake --preset vs2022-windows-vcpkg-ae
 cmake --build buildae --config Release
 ```
 ## License
-[MIT](LICENSE)
+[Original mod](https://github.com/powerof3/DialogueHistory) under the MIT License; so is this derived work.
