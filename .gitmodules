@@ -4,4 +4,4 @@
 	url = https://github.com/powerof3/CommonLibSSE.git
 [submodule "extern/ordered-map"]
 	path = extern/ordered-map
-	url = https://github.com/Tessil/ordered-map
+	url = https://github.com/lordmentat/ordered-map
