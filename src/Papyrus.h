@@ -2,7 +2,7 @@
 
 namespace Papyrus
 {
-	inline constexpr auto MCM = "DialogueHistory_MCM"sv;
+	inline constexpr auto MCM = "SpellResearchUI_MCM"sv;
 
 	void OnConfigClose(RE::TESQuest*);
 
