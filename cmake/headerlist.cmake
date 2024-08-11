@@ -1,6 +1,6 @@
 set(headers ${headers}
 	src/Compatibility.h
-	src/GlobalHistory.h
+	src/SpellExperience.h
 	src/Hooks.h
 	src/Hotkeys.h
 	src/ImGui/Backend/imgui_impl_win32.h

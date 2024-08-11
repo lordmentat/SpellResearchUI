@@ -1,6 +1,6 @@
 #include "Hotkeys.h"
 
-#include "GlobalHistory.h"
+#include "SpellExperience.h"
 #include "ImGui/IconsFonts.h"
 #include "Input.h"
 
@@ -11,11 +11,8 @@ namespace Hotkeys
 		spellExperience.LoadKeys(a_ini);
 	}
 
-	void Manager::TryToggleDialogueHistory(const RE::InputEvent* const* a_event)
+	void Manager::TryToggleSpellExperience(const RE::InputEvent* const* a_event)
 	{
-		/*localHistory.ProcessKeyPress(a_event, []() {
-			MANAGER(LocalHistory)->ToggleActive();
-		});*/
 		spellExperience.ProcessKeyPress(a_event, []() {
 			MANAGER(SpellExperience)->ToggleActive();
 		});

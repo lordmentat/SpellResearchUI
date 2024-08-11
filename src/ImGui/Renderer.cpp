@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-#include "GlobalHistory.h"
+#include "SpellExperience.h"
 #include "IconsFonts.h"
 #include "Input.h"
 #include "Styles.h"

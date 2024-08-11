@@ -1,6 +1,6 @@
 set(sources ${sources}
 	src/Compatibility.cpp
-	src/GlobalHistory.cpp
+	src/SpellExperience.cpp
 	src/Hooks.cpp
 	src/Hotkeys.cpp
 	src/ImGui/Backend/imgui_impl_win32.cpp

@@ -1,6 +1,6 @@
 #include "Settings.h"
 
-#include "GlobalHistory.h"
+#include "SpellExperience.h"
 #include "Hotkeys.h"
 #include "ImGui/IconsFonts.h"
 #include "ImGui/Renderer.h"

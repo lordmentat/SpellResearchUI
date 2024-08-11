@@ -1,6 +1,6 @@
 #include "Input.h"
 
-#include "GlobalHistory.h"
+#include "SpellExperience.h"
 #include "Hotkeys.h"
 
 namespace Input
@@ -394,6 +394,6 @@ namespace Input
 			}
 		}
 
-		MANAGER(Hotkeys)->TryToggleDialogueHistory(a_events);
+		MANAGER(Hotkeys)->TryToggleSpellExperience(a_events);
 	}
 }

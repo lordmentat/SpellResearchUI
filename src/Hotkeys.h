@@ -12,7 +12,7 @@ namespace Hotkeys
 	public:
 		void LoadHotKeys(const CSimpleIniA& a_ini);
 
-		void TryToggleDialogueHistory(const RE::InputEvent* const* a_event);
+		void TryToggleSpellExperience(const RE::InputEvent* const* a_event);
 
 		static std::uint32_t         EscapeKey();
 		const IconFont::IconTexture* EscapeIcon() const;
@@ -50,7 +50,6 @@ namespace Hotkeys
 			std::string type;
 		};
 
-		//KeyCombo localHistory{ "LocalHistory" };
 		KeyCombo spellExperience{ "SpellExperience" };
 	};
 }

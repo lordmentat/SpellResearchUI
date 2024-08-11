@@ -14,8 +14,6 @@ namespace Input
 		public ISingleton<Manager>
 	{
 	public:
-		static void Register();
-
 		DEVICE GetInputDevice() const;
 		void   ProcessInputEvents(RE::InputEvent* const* a_events);
 

@@ -1,4 +1,4 @@
-#include "GlobalHistory.h"
+#include "SpellExperience.h"
 #include "Hooks.h"
 #include "ImGui/Renderer.h"
 #include "Input.h"
@@ -18,7 +18,6 @@ void OnInit(SKSE::MessagingInterface::Message* a_msg)
 	case SKSE::MessagingInterface::kDataLoaded:
 		{
 			logger::info("{:*^30}", "DATA LOADED");
-			//MANAGER(SpellExperience)->Register();
 			PhotoMode::activeGlobal = RE::TESForm::LookupByEditorID<RE::TESGlobal>("PhotoMode_IsActive");
 
 			MANAGER(Translation)->BuildTranslationMap();
