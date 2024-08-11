@@ -1,0 +1,89 @@
+$SR_Title	Esperienza di Ricerca delle Magie
+$SR_Title_MCM	Interfaccia Ricerca delle Magie
+
+$SR_Exit_Button	Esci
+$SR_Filter_Text	Filtro
+
+$SR_Controls_Page	Controlli
+$SR_OpenSpellExperience_Header	Apri Cronologia Dialoghi
+$SR_OpenSpellExperience_Gamepad_Header	Apri Cronologia Dialoghi (Gamepad)
+$SR_PrimaryKey_Text	Tasto Principale
+$SR_ModifierKey_Text	Tasto Modificatore
+$SR_ControllerButtonScheme_Text	Schema Pulsanti
+$SR_AUTODETECT	RILEVAMENTO AUTOMATICO
+$SR_XBOX	XBOX
+$SR_PLAYSTATION	PLAYSTATION
+
+$SR_SettingsPage	Impostazioni
+$SR_SpellExperience_Header	Cronologia Dialoghi
+$SR_UnpauseMenu_Text	Riprendi Menu
+$SR_UnpauseMenu_Help	Riprendi menu
+$SR_BlurMenu_Text	Offusca Menu
+$SR_BlurMenu_Help	Offusca sfondo menu
+
+$SR_Novice	Esperienza da Principiante
+$SR_Apprentice	Esperienza da Apprendista
+$SR_Adept	Esperienza da Adepto
+$SR_Expert	Esperienza da Esperto
+$SR_Master	Esperienza da Maestro
+
+$SR_Archetype0	Lancio di Concentrazione
+$SR_Archetype1	Lancio Rapido
+$SR_Archetype2	Acido
+$SR_Archetype3	Aria
+$SR_Archetype4	Apparizioni
+$SR_Archetype5	Energia Arcana
+$SR_Archetype6	Armatura
+$SR_Archetype7	Costrutti Magici
+$SR_Archetype8	Creature
+$SR_Archetype9	Daedra
+$SR_Archetype10	Malattia
+$SR_Archetype11	Terra
+$SR_Archetype12	Fuoco
+$SR_Archetype13	Carne
+$SR_Archetype14	Forza Magica
+$SR_Archetype15	Gelo
+$SR_Archetype16	Salute
+$SR_Archetype17	Mortali
+$SR_Archetype18	Vita
+$SR_Archetype19	Luce
+$SR_Archetype20	Magicka
+$SR_Archetype21	Metallo
+$SR_Archetype22	Natura
+$SR_Archetype23	Veleno
+$SR_Archetype24	Resistenza
+$SR_Archetype25	Ombre
+$SR_Archetype26	Scudi
+$SR_Archetype27	Shock
+$SR_Archetype28	Anime
+$SR_Archetype29	Stamina
+$SR_Archetype30	Il Sole
+$SR_Archetype31	Tempo
+$SR_Archetype32	Trappole Magiche
+$SR_Archetype33	Non Morti
+$SR_Archetype34	Acqua
+$SR_Archetype35	Armi
+$SR_Archetype36	Incantesimi di Alterazione
+$SR_Archetype37	Incantesimi di Evocazione
+$SR_Archetype38	Incantesimi di Distruzione
+$SR_Archetype39	Incantesimi di Illusione
+$SR_Archetype40	Incantesimi di Restauro
+$SR_Archetype41	Mira su Bersaglio
+$SR_Archetype42	Mira ad Area
+$SR_Archetype43	Mira alla Posizione
+$SR_Archetype44	Mira su Se Stessi
+$SR_Archetype45	Tecniche di Occultamento
+$SR_Archetype46	Tecniche di Controllo
+$SR_Archetype47	Tecniche di Coraggio
+$SR_Archetype48	Tecniche di Guarigione
+$SR_Archetype49	Tecniche di Maledizione
+$SR_Archetype50	Tecniche di Paura
+$SR_Archetype51	Tecniche di Follia
+$SR_Archetype52	Tecniche di Infusione
+$SR_Archetype53	Tecniche di Pacificazione
+$SR_Archetype54	Tecniche di Sensazione
+$SR_Archetype55	Tecniche di Sifonamento
+$SR_Archetype56	Tecniche di Rafforzamento
+$SR_Archetype57	Tecniche di Evocazione
+$SR_Archetype58	Tecniche di Telecinesi
+$SR_Archetype59	Tecniche di Trasformazione

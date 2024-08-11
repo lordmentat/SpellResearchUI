@@ -3,7 +3,6 @@
 #include "GlobalHistory.h"
 #include "IconsFonts.h"
 #include "Input.h"
-#include "LocalHistory.h"
 #include "Styles.h"
 
 namespace ImGui::Renderer
@@ -106,8 +105,8 @@ namespace ImGui::Renderer
 				}
 				ImGui::NewFrame();
 				{
-					MANAGER(LocalHistory)->Draw();
-					MANAGER(GlobalHistory)->Draw();
+					//MANAGER(LocalHistory)->Draw();
+					MANAGER(SpellExperience)->Draw();
 				}
 				ImGui::EndFrame();
 				ImGui::Render();

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
-set(NAME "po3_DialogueHistory" CACHE STRING "")
-set(VERSION 1.1.2 CACHE STRING "")
+set(NAME "SpellResearchUI" CACHE STRING "")
+set(VERSION 1.0.0 CACHE STRING "")
 set(AE_VERSION 1)
 set(VR_VERSION 1)
 
@@ -132,6 +132,7 @@ else ()
 	)
 endif()
 
+
 find_package(directxtex CONFIG REQUIRED)
 find_package(glaze CONFIG REQUIRED)
 find_package(Freetype REQUIRED)
@@ -139,6 +140,9 @@ find_package(imgui CONFIG REQUIRED)
 
 find_path(SRELL_INCLUDE_DIRS "srell.hpp")
 find_path(CLIB_UTIL_INCLUDE_DIRS "ClibUtil/utils.hpp")
+
+add_subdirectory(extern/ordered-map)
+
 
 # ---- Add source files ----
 
@@ -202,6 +206,7 @@ target_link_libraries(
 		Freetype::Freetype
 		glaze::glaze
 		imgui::imgui
+		tsl::ordered_map
 )
 
 target_precompile_headers(

@@ -10,11 +10,11 @@ namespace Translation
 
 	void Manager::BuildTranslationMap()
 	{
-		std::filesystem::path path{ std::format(R"(Data\Interface\Translations\DialogueHistory_{}.txt)", GetGameLanguage()) };
+		std::filesystem::path path{ std::format(R"(Data\Interface\Translations\SpellResearchUI_{}.txt)", GetGameLanguage()) };
 
 		if (!LoadTranslation(path)) {
 			logger::info("Failed to load translation file in {}, loading default ENGLISH file...", path.string());
-			LoadTranslation(R"(Data\Interface\Translations\DialogueHistory_ENGLISH.txt)"sv);
+			LoadTranslation(R"(Data\Interface\Translations\SpellResearchUI_ENGLISH.txt)"sv);
 		}
 	}
 

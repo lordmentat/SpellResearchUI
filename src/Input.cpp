@@ -2,7 +2,6 @@
 
 #include "GlobalHistory.h"
 #include "Hotkeys.h"
-#include "LocalHistory.h"
 
 namespace Input
 {
@@ -313,7 +312,7 @@ namespace Input
 
 	void Manager::ProcessInputEvents(RE::InputEvent* const* a_events)
 	{
-		bool drawGlobalHistory = MANAGER(GlobalHistory)->IsGlobalHistoryOpen();
+		bool drawGlobalHistory = MANAGER(SpellExperience)->IsSpellExperienceOpen();
 
 		auto& io = ImGui::GetIO();
 		auto  cursorMenu = RE::UI::GetSingleton()->GetMenu<RE::CursorMenu>();

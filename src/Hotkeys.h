@@ -18,7 +18,6 @@ namespace Hotkeys
 		const IconFont::IconTexture* EscapeIcon() const;
 
 		std::set<const IconFont::IconTexture*> GlobalHistoryIcons() const;
-		std::set<const IconFont::IconTexture*> LocalHistoryIcons() const;
 
 	private:
 		struct KeyCombo
@@ -51,7 +50,7 @@ namespace Hotkeys
 			std::string type;
 		};
 
-		KeyCombo localHistory{ "LocalHistory" };
-		KeyCombo globalHistory{ "GlobalHistory" };
+		//KeyCombo localHistory{ "LocalHistory" };
+		KeyCombo spellExperience{ "SpellExperience" };
 	};
 }

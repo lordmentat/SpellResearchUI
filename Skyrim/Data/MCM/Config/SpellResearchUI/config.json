@@ -1,0 +1,103 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/MCM-Helper/main/docs/config.schema.json",
+  "modName": "SpellResearchUI",
+  "displayName": "$SR_Title_MCM",
+  "minMcmVersion": 13,
+  "pluginRequirements": [ "SpellResearchUI.esp" ],
+  "cursorFillMode": "topToBottom",
+  "pages": [
+    {
+      "pageDisplayName": "$SR_Controls_Page",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$SR_OpenSpellExperience_Header",
+          "type": "header"
+        },
+        {
+          "id": "iSpellExperienceKey:Controls",
+          "text": "$SR_PrimaryKey_Text",
+          "type": "keymap",
+          "ignoreConflicts": true,
+          "valueOptions": {
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "id": "iSpellExperienceKeyModifier:Controls",
+          "text": "$SR_ModifierKey_Text",
+          "type": "keymap",
+          "ignoreConflicts": true,
+          "valueOptions": {
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "type": "empty"
+        },
+        {
+          "text": "$SR_OpenSpellExperience_Gamepad_Header",
+          "type": "header"
+        },
+        {
+          "id": "iSpellExperienceGamePad:Controls",
+          "text": "$SR_PrimaryKey_Text",
+          "type": "keymap",
+          "ignoreConflicts": true,
+          "valueOptions": {
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "id": "iSpellExperienceGamePadModifier:Controls",
+          "text": "$SR_ModifierKey_Text",
+          "type": "keymap",
+          "ignoreConflicts": true,
+          "valueOptions": {
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "type": "empty"
+        },
+        {
+          "id": "iButtonScheme:Controls",
+          "text": "$SR_ControllerButtonScheme_Text",
+          "type": "enum",
+          "valueOptions": {
+            "options": [ "$SR_AUTODETECT", "$SR_XBOX", "$SR_PLAYSTATION" ],
+            "sourceType": "ModSettingInt"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$SR_SettingsPage",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$SR_SpellExperience_Header",
+          "type": "header"
+        },
+        {
+          "id": "bUnpauseSpellExperience:Settings",
+          "text": "$SR_UnpauseMenu_Text",
+          "type": "toggle",
+          "help": "$SR_UnpauseMenu_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bBlurSpellExperience:Settings",
+          "text": "$SR_BlurMenu_Text",
+          "type": "toggle",
+          "help": "$SR_BlurMenu_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,11 +1,9 @@
 #include "Settings.h"
 
-#include "Dialogue.h"
 #include "GlobalHistory.h"
 #include "Hotkeys.h"
 #include "ImGui/IconsFonts.h"
 #include "ImGui/Renderer.h"
-#include "LocalHistory.h"
 
 void Settings::SerializeINI(const wchar_t* a_path, const std::function<void(CSimpleIniA&)> a_func, bool a_generate)
 {
@@ -35,8 +33,7 @@ void Settings::LoadMCMSettings() const
 	constexpr auto load_mcm_settings = [](auto& ini) {
 		MANAGER(Hotkeys)->LoadHotKeys(ini);
 		MANAGER(IconFont)->LoadMCMSettings(ini);       // button scheme
-		MANAGER(LocalHistory)->LoadMCMSettings(ini);   // menu
-		MANAGER(GlobalHistory)->LoadMCMSettings(ini);  // time format, menu
+		MANAGER(SpellExperience)->LoadMCMSettings(ini);  // time format, menu
 	};
 
 	SerializeINI(defaultMCMPath, userMCMPath, load_mcm_settings);

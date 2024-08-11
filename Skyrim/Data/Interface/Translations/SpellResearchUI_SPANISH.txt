@@ -1,0 +1,89 @@
+$SR_Title	Spell Research Experience
+$SR_Title_MCM	Spell Research UI
+
+$SR_Exit_Button	Exit
+$SR_Filter_Text	Filter
+
+$SR_Controls_Page	Controls
+$SR_OpenSpellExperience_Header	Open Dialogue History
+$SR_OpenSpellExperience_Gamepad_Header	Open Dialogue History (Gamepad)
+$SR_PrimaryKey_Text	Key
+$SR_ModifierKey_Text	Modifier Key
+$SR_ControllerButtonScheme_Text	Button Scheme
+$SR_AUTODETECT	AUTO DETECT
+$SR_XBOX	XBOX
+$SR_PLAYSTATION	PLAYSTATION
+
+$SR_SettingsPage	Settings
+$SR_SpellExperience_Header	Dialogue History
+$SR_UnpauseMenu_Text	Unpause Menu
+$SR_UnpauseMenu_Help	Unpause menu
+$SR_BlurMenu_Text	Blur Menu
+$SR_BlurMenu_Help	Blur menu background
+
+$SR_Novice	Novice Experience
+$SR_Apprentice	Apprentice Experience
+$SR_Adept	Adept Experience
+$SR_Expert	Expert Experience
+$SR_Master	Master Experience
+
+$SR_Archetype0	Concentration Casting
+$SR_Archetype1	Fire and Forget Casting
+$SR_Archetype2	Acid
+$SR_Archetype3	Air
+$SR_Archetype4	Apparitions
+$SR_Archetype5	Arcane Energy
+$SR_Archetype6	Armor
+$SR_Archetype7	Magical Constructs
+$SR_Archetype8	Creatures
+$SR_Archetype9	Daedra
+$SR_Archetype10	Disease
+$SR_Archetype11	Earth
+$SR_Archetype12	Fire
+$SR_Archetype13	Flesh
+$SR_Archetype14	Magical Force
+$SR_Archetype15	Frost
+$SR_Archetype16	Health
+$SR_Archetype17	Mortals
+$SR_Archetype18	Life
+$SR_Archetype19	Light
+$SR_Archetype20	Magicka
+$SR_Archetype21	Metal
+$SR_Archetype22	Nature
+$SR_Archetype23	Poison
+$SR_Archetype24	Resistance
+$SR_Archetype25	Shadows
+$SR_Archetype26	Shields
+$SR_Archetype27	Shock
+$SR_Archetype28	Souls
+$SR_Archetype29	Stamina
+$SR_Archetype30	The Sun
+$SR_Archetype31	Time
+$SR_Archetype32	Magical Traps
+$SR_Archetype33	Undead
+$SR_Archetype34	Water
+$SR_Archetype35	Weapons
+$SR_Archetype36	Alteration Spells
+$SR_Archetype37	Conjuration Spells
+$SR_Archetype38	Destruction Spells
+$SR_Archetype39	Illusion Spells
+$SR_Archetype40	Restoration Spells
+$SR_Archetype41	Aimed Targeting
+$SR_Archetype42	Area of Effect Targeting
+$SR_Archetype43	Location Targeting
+$SR_Archetype44	Self Targeting
+$SR_Archetype45	Cloaking Techniques
+$SR_Archetype46	Controlling Techniques
+$SR_Archetype47	Courage Techniques
+$SR_Archetype48	Curing Techniques
+$SR_Archetype49	Cursing Techniques
+$SR_Archetype50	Fear Techniques
+$SR_Archetype51	Frenzy Techniques
+$SR_Archetype52	Infusing Techniques
+$SR_Archetype53	Pacifying Techniques
+$SR_Archetype54	Sensing Techniques
+$SR_Archetype55	Siphoning Techniques
+$SR_Archetype56	Strengthening Techniques
+$SR_Archetype57	Summoning Techniques
+$SR_Archetype58	Telekinesis Techniques
+$SR_Archetype59	Transforming Techniques

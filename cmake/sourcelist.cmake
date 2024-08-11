@@ -1,6 +1,5 @@
 set(sources ${sources}
 	src/Compatibility.cpp
-	src/Dialogue.cpp
 	src/GlobalHistory.cpp
 	src/Hooks.cpp
 	src/Hotkeys.cpp
@@ -11,8 +10,6 @@ set(sources ${sources}
 	src/ImGui/Styles.cpp
 	src/ImGui/Util.cpp
 	src/Input.cpp
-	src/LocalHistory.cpp
-	src/NPCNameProvider.cpp
 	src/PCH.cpp
 	src/Papyrus.cpp
 	src/Settings.cpp

@@ -1,0 +1,89 @@
+$SR_Title	Zkušenost s Výzkumem Kouzel
+$SR_Title_MCM	Uživatelské Rozhraní Výzkumu Kouzel
+
+$SR_Exit_Button	Ukončit
+$SR_Filter_Text	Filtr
+
+$SR_Controls_Page	Ovládání
+$SR_OpenSpellExperience_Header	Otevřít Historii Dialogů
+$SR_OpenSpellExperience_Gamepad_Header	Otevřít Historii Dialogů (Gamepad)
+$SR_PrimaryKey_Text	Hlavní Klávesa
+$SR_ModifierKey_Text	Modifikační Klávesa
+$SR_ControllerButtonScheme_Text	Schéma Tlačítek
+$SR_AUTODETECT	AUTOMATICKÁ DETEKCE
+$SR_XBOX	XBOX
+$SR_PLAYSTATION	PLAYSTATION
+
+$SR_SettingsPage	Nastavení
+$SR_SpellExperience_Header	Historie Dialogů
+$SR_UnpauseMenu_Text	Obnovit Menu
+$SR_UnpauseMenu_Help	Obnovit menu
+$SR_BlurMenu_Text	Rozmazat Menu
+$SR_BlurMenu_Help	Rozmazat pozadí menu
+
+$SR_Novice	Zkušenost Začátečníka
+$SR_Apprentice	Zkušenost Učedníka
+$SR_Adept	Zkušenost Adepta
+$SR_Expert	Zkušenost Experta
+$SR_Master	Zkušenost Mistra
+
+$SR_Archetype0	Soustředěné Kouzlení
+$SR_Archetype1	Rychlé Kouzlení
+$SR_Archetype2	Kyselina
+$SR_Archetype3	Vzduch
+$SR_Archetype4	Zjevení
+$SR_Archetype5	Arkána
+$SR_Archetype6	Brnění
+$SR_Archetype7	Magické Konstrukty
+$SR_Archetype8	Stvoření
+$SR_Archetype9	Daedra
+$SR_Archetype10	Nemoc
+$SR_Archetype11	Země
+$SR_Archetype12	Oheň
+$SR_Archetype13	Maso
+$SR_Archetype14	Magická Síla
+$SR_Archetype15	Mráz
+$SR_Archetype16	Zdraví
+$SR_Archetype17	Smrtelníci
+$SR_Archetype18	Život
+$SR_Archetype19	Světlo
+$SR_Archetype20	Magicka
+$SR_Archetype21	Kov
+$SR_Archetype22	Příroda
+$SR_Archetype23	Jed
+$SR_Archetype24	Odolnost
+$SR_Archetype25	Stíny
+$SR_Archetype26	Štíty
+$SR_Archetype27	Šok
+$SR_Archetype28	Duše
+$SR_Archetype29	Vytrvalost
+$SR_Archetype30	Slunce
+$SR_Archetype31	Čas
+$SR_Archetype32	Magické Pasti
+$SR_Archetype33	Nemrtví
+$SR_Archetype34	Voda
+$SR_Archetype35	Zbraně
+$SR_Archetype36	Transmutace Kouzla
+$SR_Archetype37	Vyvolávání Kouzla
+$SR_Archetype38	Destrukce Kouzla
+$SR_Archetype39	Iluzorní Kouzla
+$SR_Archetype40	Restaurovací Kouzla
+$SR_Archetype41	Zacílené Zaměřování
+$SR_Archetype42	Oblastní Zaměřování
+$SR_Archetype43	Cílení na Místo
+$SR_Archetype44	Cílení na Sebe
+$SR_Archetype45	Techniky Maskování
+$SR_Archetype46	Techniky Ovládání
+$SR_Archetype47	Techniky Odvahy
+$SR_Archetype48	Techniky Léčení
+$SR_Archetype49	Techniky Proklínání
+$SR_Archetype50	Techniky Strachu
+$SR_Archetype51	Techniky Šílenství
+$SR_Archetype52	Techniky Infuzí
+$SR_Archetype53	Techniky Uklidnění
+$SR_Archetype54	Techniky Vnímání
+$SR_Archetype55	Techniky Odsávání
+$SR_Archetype56	Techniky Posilování
+$SR_Archetype57	Techniky Vyvolávání
+$SR_Archetype58	Techniky Telekineze
+$SR_Archetype59	Techniky Transformace

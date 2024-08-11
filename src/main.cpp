@@ -2,8 +2,6 @@
 #include "Hooks.h"
 #include "ImGui/Renderer.h"
 #include "Input.h"
-#include "LocalHistory.h"
-#include "NPCNameProvider.h"
 #include "Papyrus.h"
 #include "Settings.h"
 
@@ -17,45 +15,15 @@ void OnInit(SKSE::MessagingInterface::Message* a_msg)
 			Hooks::Install();
 		}
 		break;
-	case SKSE::MessagingInterface::kPostPostLoad:
-		{
-			logger::info("{:*^30}", "POST POST LOAD");
-			NPCNameProvider::GetSingleton()->RequestAPI();
-		}
-		break;
 	case SKSE::MessagingInterface::kDataLoaded:
 		{
 			logger::info("{:*^30}", "DATA LOADED");
-			MANAGER(LocalHistory)->Register();
-			MANAGER(GlobalHistory)->Register();
-
+			//MANAGER(SpellExperience)->Register();
 			PhotoMode::activeGlobal = RE::TESForm::LookupByEditorID<RE::TESGlobal>("PhotoMode_IsActive");
 
 			MANAGER(Translation)->BuildTranslationMap();
+			MANAGER(SpellExperience)->InitialiseArchetypes();
 		}
-		break;
-	case SKSE::MessagingInterface::kSaveGame:
-		{
-			std::string savePath{ static_cast<char*>(a_msg->data), a_msg->dataLen };
-			MANAGER(GlobalHistory)->SaveToFile(savePath);
-		}
-		break;
-	case SKSE::MessagingInterface::kPreLoadGame:
-		{
-			std::string savePath{ static_cast<char*>(a_msg->data), a_msg->dataLen };
-			string::replace_last_instance(savePath, ".ess", "");
-
-			MANAGER(GlobalHistory)->LoadFromFile(savePath);
-		}
-		break;
-	case SKSE::MessagingInterface::kDeleteGame:
-		{
-			const std::string savePath({ static_cast<char*>(a_msg->data), a_msg->dataLen });
-			MANAGER(GlobalHistory)->DeleteSavedFile(savePath);
-		}
-		break;
-	case SKSE::MessagingInterface::kNewGame:
-		MANAGER(GlobalHistory)->Clear();
 		break;
 	default:
 		break;
@@ -66,8 +34,8 @@ void OnInit(SKSE::MessagingInterface::Message* a_msg)
 extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []() {
 	SKSE::PluginVersionData v;
 	v.PluginVersion(Version::MAJOR);
-	v.PluginName("DialogueHistory");
-	v.AuthorName("powerofthree");
+	v.PluginName("SpellResearchUI");
+	v.AuthorName("lordmentat");
 	v.UsesAddressLibrary();
 	v.UsesUpdatedStructs();
 	v.CompatibleVersions({ SKSE::RUNTIME_LATEST });
@@ -78,7 +46,7 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []() {
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 {
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
-	a_info->name = "DialogueHistory";
+	a_info->name = "SpellResearchUI";
 	a_info->version = Version::MAJOR;
 
 	if (a_skse->IsEditor()) {

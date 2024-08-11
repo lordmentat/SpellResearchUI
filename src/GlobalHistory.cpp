@@ -6,29 +6,66 @@
 #include "ImGui/Renderer.h"
 #include "ImGui/Styles.h"
 #include "ImGui/Util.h"
-#include "NPCNameProvider.h"
 
-namespace GlobalHistory
+namespace SpellExperience
 {
-	void Manager::Register()
+	/*void Manager::Register()
 	{
 		RE::ScriptEventSourceHolder::GetSingleton()->AddEventSink(GetSingleton());
+	}*/
+
+	void Manager::InitialiseArchetypes()
+	{
+		auto archetypeFormList = RE::TESForm::LookupByEditorID("_SR_ListGlobalsArchetypes")->As<RE::BGSListForm>();
+
+		archetypeGlobals.clear();
+
+		int archCounter = 0;
+		archetypeFormList->ForEachForm([&](RE::TESForm* form) {
+
+			std::string translationKey = "$SR_Archetype" + std::to_string(archCounter);
+			std::string archName = Translation::Manager::GetSingleton()->GetTranslation(translationKey);
+			archetypeGlobals[archName] = {};
+
+			auto archetypeList = form->As<RE::BGSListForm>();
+			archetypeList->ForEachForm([&](RE::TESForm* form) {
+				std::string editorId(form->GetFormEditorID());
+				std::string label = "";
+				if (editorId.contains("Novice")) {
+					label = "$SR_Novice"_T;
+				} else if (editorId.contains("Apprentice")) {
+					label = "$SR_Apprentice"_T;
+				} else if (editorId.contains("Adept")) {
+					label = "$SR_Adept"_T;
+				} else if (editorId.contains("Expert")) {
+					label = "$SR_Expert"_T;
+				} else if (editorId.contains("Master")) {
+					label = "$SR_Master"_T;
+				}
+				archetypeGlobals[archName][label] = form->GetFormID();
+
+				return RE::BSContainer::ForEachResult::kContinue;
+			});
+
+			archCounter++;
+			return RE::BSContainer::ForEachResult::kContinue;
+		});
 	}
 
 	void Manager::LoadMCMSettings(const CSimpleIniA& a_ini)
 	{
-		use12HourFormat = a_ini.GetBoolValue("Settings", "b12HourFormat", use12HourFormat);
-		unpauseMenu = a_ini.GetBoolValue("Settings", "bUnpauseGlobalHistory", unpauseMenu);
-		blurMenu = a_ini.GetBoolValue("Settings", "bBlurGlobalHistory", blurMenu);
+		//use12HourFormat = a_ini.GetBoolValue("Settings", "b12HourFormat", use12HourFormat);
+		unpauseMenu = a_ini.GetBoolValue("Settings", "bUnpauseSpellExperience", unpauseMenu);
+		blurMenu = a_ini.GetBoolValue("Settings", "bBlurSpellExperience", blurMenu);
 
-		if (!dialoguesByDate.empty()) {
+		/*if (!dialoguesByDate.empty()) {
 			RefreshTimeStamps();
-		}
+		}*/
 	}
 
 	bool Manager::IsValid()
 	{
-		if (IsGlobalHistoryOpen()) {
+		if (IsSpellExperienceOpen()) {
 			return true;
 		}
 
@@ -60,7 +97,7 @@ namespace GlobalHistory
 
 	void Manager::Draw()
 	{
-		if (!IsGlobalHistoryOpen()) {
+		if (!IsSpellExperienceOpen()) {
 			return;
 		}
 
@@ -82,7 +119,7 @@ namespace GlobalHistory
 				ImGui::PushFont(MANAGER(IconFont)->GetHeaderFont());
 				{
 					ImGui::Indent();
-					ImGui::TextUnformatted("$DH_Title"_T);
+					ImGui::TextUnformatted("$SR_Title"_T);
 					ImGui::Unindent();
 				}
 				ImGui::PopFont();
@@ -103,11 +140,7 @@ namespace GlobalHistory
 
 					ImGui::BeginChild("##Map", { (startPos + endPos) * 0.5f, childSize.y * 0.9125f }, ImGuiChildFlags_None, ImGuiWindowFlags_NoBackground);
 					{
-						if (sortByLocation) {
-							DrawDialogueTree(dialoguesByLocation);
-						} else {
-							DrawDialogueTree(dialoguesByDate);
-						}
+						DrawArchetypeList();
 					}
 					ImGui::EndChild();
 
@@ -117,13 +150,104 @@ namespace GlobalHistory
 
 					childSize = ImGui::GetContentRegionAvail();
 
-					if (currentDialogue) {
+					if (!currentArchetype.empty()) {
+						ImGui::BeginChild("##Experience", ImVec2(0, childSize.y * 0.9125f), ImGuiChildFlags_None, windowFlags | ImGuiWindowFlags_NoBackground);
+						{
+							ImGui::Indent();
+							{
+								ImGui::PushFont(MANAGER(IconFont)->GetHeaderFont());
+								{
+									ImGui::CenteredText(currentArchetype.c_str(), false);
+								}
+								ImGui::PopFont();
+								/*if (timeAndLoc.empty()) {
+									timeAndLoc = std::format("{} - {}", TimeStampToString(MANAGER(GlobalHistory)->Use12HourFormat()), locName);
+								}
+								ImGui::CenteredText(timeAndLoc.c_str(), false);*/
+								ImGui::Spacing(4);
+
+								auto childSizeExperience = ImGui::GetContentRegionAvail();
+
+								ImGui::BeginChild("##ExperienceSections", childSizeExperience, ImGuiChildFlags_None, ImGuiWindowFlags_NoBackground);
+								{
+									// get the formlist for this archetype - it will have 5 globals in it
+									auto globalsMap = archetypeGlobals[currentArchetype];
+									for (auto& [experienceLabel, globalVar] : globalsMap) {
+										auto globalVarForm = RE::TESForm::LookupByID(globalVar)->As<RE::TESGlobal>();
+
+										ImGui::Text((experienceLabel + ":").c_str());
+										ImGui::SameLine(250);
+
+										if (globalVarForm) {
+											std::string expValue = std::format("{:.0f}", globalVarForm->value);
+											ImGui::Text(expValue.c_str());
+										}
+										ImGui::Spacing(2);
+
+									}
+									/*auto archetypeList = RE::TESForm::LookupByID(formListId)->As<RE::BGSListForm>();
+									archetypeList->ForEachForm([&](RE::TESForm* form) {
+										auto        globalValue = form->As<RE::TESGlobal>();
+										std::string editorId(form->GetFormEditorID());
+										std::string label = "";
+										if (editorId.contains("Novice")) {
+											label = "$SR_Novice"_T;
+										} else if (editorId.contains("Apprentice")) {
+											label = "$SR_Apprentice"_T;
+										} else if (editorId.contains("Adept")) {
+											label = "$SR_Adept"_T;
+										} else if (editorId.contains("Expert")) {
+											label = "$SR_Expert"_T;
+										} else if (editorId.contains("Master")) {
+											label = "$SR_Master"_T;
+										}
+										std::string expValue = "";
+										if (globalValue) {
+											expValue = std::format("{:.0f}", globalValue->value);
+										}
+
+										ImGui::Text((label + ":").c_str());
+										ImGui::SameLine(250);
+										ImGui::Text(expValue.c_str());
+										ImGui::Spacing(2);
+
+										return RE::BSContainer::ForEachResult::kContinue;
+									});*/
+									//auto archetypeFormList = RE::TESForm::LookupByEditorID("_SR_ListGlobalsArchetypes")->As<RE::BGSListForm>();
+
+									/*for (auto& [response, voice, name, isPlayer, hovered] : dialogue) {
+										auto speakerColor = isPlayer ? GetUserStyleColorVec4(USER_STYLE::kPlayerName) : GetUserStyleColorVec4(USER_STYLE::kSpeakerName);
+										ImGui::TextColoredWrapped(speakerColor, std::format("{}: ", name).c_str());
+
+										ImGui::SameLine();
+
+										auto lineColor = isPlayer ? GetUserStyleColorVec4(USER_STYLE::kPlayerLine) : GetUserStyleColorVec4(USER_STYLE::kSpeakerLine);
+										lineColor.w = (!isGlobalHistoryOpen || isPlayer || hovered) ? 1.0f : GetUserStyleVar(USER_STYLE::kDisabledTextAlpha);
+
+										ImGui::TextColoredWrapped(lineColor, response.c_str());
+
+										hovered = ImGui::IsItemHovered();
+
+										if (ImGui::IsItemClicked() && isGlobalHistoryOpen) {
+											MANAGER(GlobalHistory)->PlayVoiceline(voice);
+										}
+
+										ImGui::Spacing(3);
+									}*/
+								}
+								ImGui::EndChild();
+							}
+							ImGui::Unindent();
+						}
+						ImGui::EndChild();
+					}
+					/*if (currentDialogue) {
 						ImGui::BeginChild("##History", ImVec2(0, childSize.y * 0.9125f), ImGuiChildFlags_None, windowFlags | ImGuiWindowFlags_NoBackground);
 						{
 							currentDialogue->Draw();
 						}
 						ImGui::EndChild();
-					}
+					}*/
 				}
 				ImGui::EndGroup();
 
@@ -139,11 +263,12 @@ namespace GlobalHistory
 					ImGui::SameLine();
 					ImGui::SetCursorPosY(childSize.y * 0.125f);
 					ImGui::SetNextItemWidth(childSize.x * 0.25f);
-					if (ImGui::InputTextWithHint("##Name", "$DH_Name_Text"_T, &nameFilter)) {
-						currentDialogue = std::nullopt;
+					if (ImGui::InputTextWithHint("##Name", "$SR_Filter_Text"_T, &nameFilter)) {
+						//currentDialogue = std::nullopt;
+						currentArchetype = "";
 					}
 
-					ImGui::SetCursorPosX(childSize.x * 0.5f - toggleButtonOffset);
+					/*ImGui::SetCursorPosX(childSize.x * 0.5f - toggleButtonOffset);
 					ImGui::SetCursorPosY(childSize.y * 0.25f);
 
 					ImGui::BeginGroup();
@@ -167,7 +292,7 @@ namespace GlobalHistory
 						ImGui::TextUnformatted("$DH_Location_Text"_T);
 						ImGui::EndDisabled();
 					}
-					ImGui::EndGroup();
+					ImGui::EndGroup();*/
 				}
 				ImGui::EndChild();
 			}
@@ -185,7 +310,7 @@ namespace GlobalHistory
 				static float      posX = 0.92916666666f * windowSize.width;
 
 				ImGui::SetCursorScreenPos({ posX, posY });
-				ImGui::ButtonIconWithLabel("$DH_Exit_Button"_T, icon);
+				ImGui::ButtonIconWithLabel("$SR_Exit_Button"_T, icon);
 				if (ImGui::IsItemClicked()) {
 					SetGlobalHistoryOpen(false);
 				}
@@ -199,14 +324,14 @@ namespace GlobalHistory
 		}
 	}
 
-	bool Manager::IsGlobalHistoryOpen() const
+	bool Manager::IsSpellExperienceOpen() const
 	{
-		return globalHistoryOpen;
+		return spellHistoryOpen;
 	}
 
 	void Manager::SetGlobalHistoryOpen(bool a_open)
 	{
-		globalHistoryOpen = a_open;
+		spellHistoryOpen = a_open;
 		menuOpenedJustNow = a_open;
 
 		if (a_open) {
@@ -223,13 +348,14 @@ namespace GlobalHistory
 			RE::PlaySound("UIMenuOK");
 
 		} else {
-			currentDialogue = std::nullopt;
+			//currentDialogue = std::nullopt;
+			currentArchetype = "";
 
 			nameFilter.clear();
-			dialoguesByDate.clear_filter();
+			/*dialoguesByDate.clear_filter();
 			dialoguesByLocation.clear_filter();
 
-			voiceHandle.Stop();
+			voiceHandle.Stop();*/
 
 			if (blurMenu) {
 				RE::UIBlurManager::GetSingleton()->DecrementBlurCount();
@@ -254,15 +380,10 @@ namespace GlobalHistory
 			return;
 		}
 
-		SetGlobalHistoryOpen(!IsGlobalHistoryOpen());
+		SetGlobalHistoryOpen(!IsSpellExperienceOpen());
 	}
 
-	bool Manager::Use12HourFormat() const
-	{
-		return use12HourFormat;
-	}
-
-	void Manager::SaveDialogueHistory(const std::tm& a_time, const Dialogue& a_dialogue)
+	/*void Manager::SaveDialogueHistory(const std::tm& a_time, const Dialogue& a_dialogue)
 	{
 		dialogues.push_back(a_dialogue);
 
@@ -289,10 +410,10 @@ namespace GlobalHistory
 				hourMinMap.insert(std::move(node));
 			}
 		}
-	}
+	}*/
 
 	// My Documents/My Games/Skyrim Special Edition/Saves/Dialogue History
-	std::optional<std::filesystem::path> Manager::GetSaveDirectory()
+	/*std::optional<std::filesystem::path> Manager::GetSaveDirectory()
 	{
 		if (!saveDirectory) {
 			try {
@@ -341,18 +462,18 @@ namespace GlobalHistory
 		jsonPath->replace_extension(".json");
 
 		return jsonPath;
-	}
+	}*/
 
-	EventResult Manager::ProcessEvent(const RE::TESLoadGameEvent* a_evn, RE::BSTEventSource<RE::TESLoadGameEvent>*)
-	{
-		if (a_evn && finishLoading) {
-			FinishLoadFromFile();
-		}
+	//EventResult Manager::ProcessEvent(const RE::TESLoadGameEvent* a_evn, RE::BSTEventSource<RE::TESLoadGameEvent>*)
+	//{
+	//	/*if (a_evn && finishLoading) {
+	//		FinishLoadFromFile();
+	//	}*/
 
-		return EventResult::kContinue;
-	}
+	//	return EventResult::kContinue;
+	//}
 
-	void Manager::SaveToFile(const std::string& a_save)
+	/*void Manager::SaveToFile(const std::string& a_save)
 	{
 		const auto& jsonPath = GetDialogueHistoryFile(a_save);
 		if (!jsonPath) {
@@ -417,7 +538,7 @@ namespace GlobalHistory
 					dialogue.locName = "???";
 				}
 
-				dialogue.speakerName = NPCNameProvider::GetSingleton()->GetName(speakerActor);
+				dialogue.speakerName = "";
 
 				for (auto& [line, voice, name, isPlayer, hovered] : dialogue.dialogue) {
 					isPlayer = voice.empty();
@@ -457,16 +578,16 @@ namespace GlobalHistory
 		}
 
 		std::filesystem::remove(*jsonPath);
-	}
+	}*/
 
-	void Manager::Clear()
+	/*void Manager::Clear()
 	{
 		dialogues.clear();
 		dialoguesByDate.clear();
 		dialoguesByLocation.clear();
-	}
+	}*/
 
-	void Manager::PlayVoiceline(const std::string& a_voiceline)
+	/*void Manager::PlayVoiceline(const std::string& a_voiceline)
 	{
 #undef GetObject
 
@@ -489,5 +610,5 @@ namespace GlobalHistory
 		}
 
 		voiceHandle.Play();
-	}
+	}*/
 }

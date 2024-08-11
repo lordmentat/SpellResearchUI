@@ -3,23 +3,21 @@
 #include "GlobalHistory.h"
 #include "ImGui/IconsFonts.h"
 #include "Input.h"
-#include "LocalHistory.h"
 
 namespace Hotkeys
 {
 	void Manager::LoadHotKeys(const CSimpleIniA& a_ini)
 	{
-		localHistory.LoadKeys(a_ini);
-		globalHistory.LoadKeys(a_ini);
+		spellExperience.LoadKeys(a_ini);
 	}
 
 	void Manager::TryToggleDialogueHistory(const RE::InputEvent* const* a_event)
 	{
-		localHistory.ProcessKeyPress(a_event, []() {
+		/*localHistory.ProcessKeyPress(a_event, []() {
 			MANAGER(LocalHistory)->ToggleActive();
-		});
-		globalHistory.ProcessKeyPress(a_event, []() {
-			MANAGER(GlobalHistory)->ToggleActive();
+		});*/
+		spellExperience.ProcessKeyPress(a_event, []() {
+			MANAGER(SpellExperience)->ToggleActive();
 		});
 	}
 
@@ -102,11 +100,6 @@ namespace Hotkeys
 		return triggered;
 	}
 
-	std::set<const IconFont::IconTexture*> Manager::LocalHistoryIcons() const
-	{
-		return MANAGER(IconFont)->GetIcons(localHistory.GetKeys());
-	}
-
 	std::uint32_t Manager::EscapeKey()
 	{
 		switch (MANAGER(Input)->GetInputDevice()) {
@@ -125,6 +118,6 @@ namespace Hotkeys
 
 	std::set<const IconFont::IconTexture*> Manager::GlobalHistoryIcons() const
 	{
-		return MANAGER(IconFont)->GetIcons(globalHistory.GetKeys());
+		return MANAGER(IconFont)->GetIcons(spellExperience.GetKeys());
 	}
 }

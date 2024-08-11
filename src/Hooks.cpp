@@ -1,7 +1,6 @@
 #include "Hooks.h"
 #include "GlobalHistory.h"
 #include "Input.h"
-#include "LocalHistory.h"
 
 namespace Hooks
 {
@@ -13,7 +12,7 @@ namespace Hooks
 				MANAGER(Input)->ProcessInputEvents(a_events);
 			}
 
-			if (MANAGER(GlobalHistory)->IsGlobalHistoryOpen()) {
+			if (MANAGER(SpellExperience)->IsSpellExperienceOpen()) {
 				constexpr RE::InputEvent* const dummy[] = { nullptr };
 				func(a_dispatcher, dummy);
 			} else {
@@ -23,7 +22,7 @@ namespace Hooks
 		static inline REL::Relocation<decltype(thunk)> func;
 	};
 
-	struct UpdateSelectedResponse
+	/*struct UpdateSelectedResponse
 	{
 		static void thunk(RE::MenuTopicManager* a_this, bool a_unk01)
 		{
@@ -36,44 +35,44 @@ namespace Hooks
 			}
 		}
 		static inline REL::Relocation<decltype(thunk)> func;
-	};
+	};*/
 
-	struct ShowSubtitle
-	{
-		static void thunk(RE::SubtitleManager* a_this, RE::TESObjectREFR* a_speaker, const char* a_subtitle, bool a_alwaysDisplay)
-		{
-			func(a_this, a_speaker, a_subtitle, a_alwaysDisplay);
+	//struct ShowSubtitle
+	//{
+	//	static void thunk(RE::SubtitleManager* a_this, RE::TESObjectREFR* a_speaker, const char* a_subtitle, bool a_alwaysDisplay)
+	//	{
+	//		func(a_this, a_speaker, a_subtitle, a_alwaysDisplay);
 
-			if (a_speaker && !a_speaker->IsPlayerRef()) {
-				std::string subtitle = a_subtitle;
-				std::string voice;
-				if (auto topic = RE::MenuTopicManager::GetSingleton()->lastSelectedDialogue) {
-					if (auto response = topic->currentResponse; response && response->item) {
-						if (voice = response->item->voice; !voice.empty()) {
-							// Strip "Data\"
-							voice.erase(0, 5);
-						}
-					}
-				}
-				MANAGER(LocalHistory)->AddDialogue(a_speaker, (subtitle.empty() || subtitle == " ") ? "..." : a_subtitle, voice);
-			}
-		}
-		static inline REL::Relocation<decltype(thunk)> func;
+	//		if (a_speaker && !a_speaker->IsPlayerRef()) {
+	//			std::string subtitle = a_subtitle;
+	//			std::string voice;
+	//			if (auto topic = RE::MenuTopicManager::GetSingleton()->lastSelectedDialogue) {
+	//				if (auto response = topic->currentResponse; response && response->item) {
+	//					if (voice = response->item->voice; !voice.empty()) {
+	//						// Strip "Data\"
+	//						voice.erase(0, 5);
+	//					}
+	//				}
+	//			}
+	//			MANAGER(LocalHistory)->AddDialogue(a_speaker, (subtitle.empty() || subtitle == " ") ? "..." : a_subtitle, voice);
+	//		}
+	//	}
+	//	static inline REL::Relocation<decltype(thunk)> func;
 
-		static void Install()
-		{
-			std::array targets{
-				std::make_pair(RELOCATION_ID(19119, 19521), 0x2B2),
-				std::make_pair(RELOCATION_ID(36543, 37544), OFFSET(0x8EC, 0x8C2)),
-			};
-			for (auto& [id, offset] : targets) {
-				REL::Relocation<std::uintptr_t> target(id, offset);
-				stl::write_thunk_call<ShowSubtitle>(target.address());
-			}
-		}
-	};
+	//	static void Install()
+	//	{
+	//		std::array targets{
+	//			std::make_pair(RELOCATION_ID(19119, 19521), 0x2B2),
+	//			std::make_pair(RELOCATION_ID(36543, 37544), OFFSET(0x8EC, 0x8C2)),
+	//		};
+	//		for (auto& [id, offset] : targets) {
+	//			REL::Relocation<std::uintptr_t> target(id, offset);
+	//			stl::write_thunk_call<ShowSubtitle>(target.address());
+	//		}
+	//	}
+	//};
 
-	struct PushHUDMode
+	/*struct PushHUDMode
 	{
 		static void thunk(const char* a_mode)
 		{
@@ -94,39 +93,39 @@ namespace Hooks
 				stl::write_thunk_call<PushHUDMode>(target.address());
 			}
 		}
-	};
+	};*/
 
-	struct PopHUDMode
-	{
-		static void thunk(const char* a_mode)
-		{
-			func(a_mode);
+	//struct PopHUDMode
+	//{
+	//	static void thunk(const char* a_mode)
+	//	{
+	//		func(a_mode);
 
-			MANAGER(LocalHistory)->SetDialogueMenuOpen(false);
-		}
-		static inline REL::Relocation<decltype(thunk)> func;
+	//		//MANAGER(LocalHistory)->SetDialogueMenuOpen(false);
+	//	}
+	//	static inline REL::Relocation<decltype(thunk)> func;
 
-		static void Install()
-		{
-			std::array targets{
-				std::make_pair(RELOCATION_ID(50617, 51511), 0xA5),
-				std::make_pair(RELOCATION_ID(50612, 51506), OFFSET(0x2A8, 0x3A7)),
-				std::make_pair(RELOCATION_ID(50612, 51506), OFFSET(0xDE, 0xE1)),
-			};
-			for (auto& [id, offset] : targets) {
-				REL::Relocation<std::uintptr_t> target(id, offset);
-				stl::write_thunk_call<PopHUDMode>(target.address());
-			}
-		}
-	};
+	//	static void Install()
+	//	{
+	//		std::array targets{
+	//			std::make_pair(RELOCATION_ID(50617, 51511), 0xA5),
+	//			std::make_pair(RELOCATION_ID(50612, 51506), OFFSET(0x2A8, 0x3A7)),
+	//			std::make_pair(RELOCATION_ID(50612, 51506), OFFSET(0xDE, 0xE1)),
+	//		};
+	//		for (auto& [id, offset] : targets) {
+	//			REL::Relocation<std::uintptr_t> target(id, offset);
+	//			stl::write_thunk_call<PopHUDMode>(target.address());
+	//		}
+	//	}
+	//};
 
 	struct ProcessMessage
 	{
 		static RE::UI_MESSAGE_RESULTS thunk(RE::DialogueMenu* a_this, RE::UIMessage& a_message)
 		{
-			if (a_message.type == RE::UI_MESSAGE_TYPE::kScaleformEvent && MANAGER(LocalHistory)->IsLocalHistoryOpen()) {
+			/*if (a_message.type == RE::UI_MESSAGE_TYPE::kScaleformEvent && MANAGER(LocalHistory)->IsLocalHistoryOpen()) {
 				return RE::UI_MESSAGE_RESULTS::kIgnore;
-			}
+			}*/
 
 			return func(a_this, a_message);
 		}
@@ -141,7 +140,7 @@ namespace Hooks
 			auto result = func(a_this, a_menu);
 
 			if (!result) {
-				result = MANAGER(GlobalHistory)->IsGlobalHistoryOpen();
+				result = MANAGER(SpellExperience)->IsSpellExperienceOpen();
 			}
 
 			return result;
@@ -155,7 +154,7 @@ namespace Hooks
 		{
 			func(a_path, a_format);
 
-			if (MANAGER(GlobalHistory)->IsGlobalHistoryOpen()) {
+			if (MANAGER(SpellExperience)->IsSpellExperienceOpen()) {
 				// reshow cursor after Debug.Notification hides it
 				SKSE::GetTaskInterface()->AddUITask([] {
 					RE::UIMessageQueue::GetSingleton()->AddMessage(RE::CursorMenu::MENU_NAME, RE::UI_MESSAGE_TYPE::kShow, nullptr);
@@ -170,12 +169,12 @@ namespace Hooks
 		REL::Relocation<std::uintptr_t> inputUnk(RELOCATION_ID(67315, 68617), 0x7B);
 		stl::write_thunk_call<ProcessInputQueue>(inputUnk.address());
 
-		REL::Relocation<std::uintptr_t> topicClicked(RELOCATION_ID(50615, 51509), 0x5A);
-		stl::write_thunk_call<UpdateSelectedResponse>(topicClicked.address());
+		//REL::Relocation<std::uintptr_t> topicClicked(RELOCATION_ID(50615, 51509), 0x5A);
+		//stl::write_thunk_call<UpdateSelectedResponse>(topicClicked.address());
 
-		ShowSubtitle::Install();
-		PushHUDMode::Install();
-		PopHUDMode::Install();
+		//ShowSubtitle::Install();
+		//PushHUDMode::Install();
+		//PopHUDMode::Install();
 
 		stl::write_vfunc<RE::DialogueMenu, ProcessMessage>();
 
